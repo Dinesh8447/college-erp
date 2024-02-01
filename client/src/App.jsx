@@ -1,14 +1,20 @@
-
-
-
-
-
+import { Route, Routes } from "react-router-dom"
+import Header from "./compoents/Header"
+import About from "./compoents/About"
+import Signin from "./compoents/Signin"
+import Signup from "./compoents/Signup"
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+   <Routes>
+    <Route path="/" element={<Header/>}>
+      <Route path="about" element={<About/>} />
+      <Route path="/signin" element={<Signin/>} />
+      <Route path="/signup" element={<Signup/>} />
+
+
+    </Route>
+   </Routes>
   )
 }
 

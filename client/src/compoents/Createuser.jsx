@@ -2,14 +2,15 @@ import { Alert, Button, Label, Select, Spinner, TextInput } from 'flowbite-react
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-// import Oauth from '../compoents/Oauth'
 
 
-export default function Signup() {
+
+export default function Createuser() {
     const [formdata, setformdata] = useState({})
     const [error, seterror] = useState(null)
     const [loading, setloading] = useState(false)
-    const navigate = useNavigate()
+
+    // console.log(formdata)
 
     const handlechange = (e) => {
         setformdata({
@@ -18,21 +19,24 @@ export default function Signup() {
         })
     }
 
-    // console.log(formdata)
 
     const handlesubmit = async (e) => {
         e.preventDefault()
-        if (!formdata.username || !formdata.email || !formdata.password) {
+        if (!formdata.username || !formdata.role || !formdata.password) {
             return seterror('please fill out all fields')
         }
         try {
             setloading(true)
             seterror(null)
-            await axios.post('/auth/signup', formdata)
+
+
+
+
+            await axios.post('/api/auth/createuser', formdata)
                 .then(({ data }) => {
                     setloading(false)
-                    navigate('/signin')
-                    // console.log(data)
+                    // navigate('/signin')
+                    console.log(data)
                 })
                 .catch(e => {
                     console.log(e)
@@ -84,7 +88,7 @@ export default function Signup() {
 
                         {/* password */}
                         <div>
-                            <Label value='Password'  />
+                            <Label value='Password' />
                             <TextInput
                                 required
                                 type='password'
@@ -97,8 +101,8 @@ export default function Signup() {
                         {/* role */}
 
                         <div>
-                            <Label value='Password' />
-                            <Select required>
+                            <Label value='Select Role' />
+                            <Select id='role' onChange={handlechange} required>
                                 <option>--select user role--</option>
                                 <option value='student'>Student</option>
                                 <option value='falculty'>Falculty</option>
@@ -118,17 +122,15 @@ export default function Signup() {
                             }
                         </Button>
 
-                        {/* <Oauth/> */}
 
                     </form>
-
-                    {/* {
+                    {
                         error && (
                             <Alert className='mt-5' color='failure'>
                                 {error}
                             </Alert>
                         )
-                    } */}
+                    }
                 </div>
             </div>
 

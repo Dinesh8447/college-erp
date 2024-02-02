@@ -1,32 +1,31 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { AiOutlineFileSearch, AiOutlineSearch } from 'react-icons/ai'
-import { FaMoon } from 'react-icons/fa'
+import { FaMoon, FaSun } from 'react-icons/fa'
 import Footers from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { signoutsucces } from '../redux/user/userslice'
+import { themetoggle } from '../redux/theme/theme'
 
 
 export default function Header() {
   const path = useLocation().pathname
   const { currentuser } = useSelector(state => state.user)
+  const { theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  const handlesignout=()=>{
- 
+  const handlesignout = () => {
     try {
       axios.post('/api/auth/signout')
-      .then(()=>{
-        dispatch(signoutsucces())
-      })
-      .catch(e=>console.log(e))
+        .then(() => {
+          dispatch(signoutsucces())
+        })
+        .catch(e => console.log(e))
     } catch (error) {
       console.log(error)
     }
   }
-
-
 
 
   return (
@@ -55,34 +54,34 @@ export default function Header() {
         </Button>
 
         <div className='flex items-center gap-2 md:order-2'>
-          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
-            <FaMoon />
+          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => themetoggle()}>
+            {theme === 'light' ? <FaSun /> : <FaMoon />}
           </Button>
 
           {currentuser && currentuser.role === 'falculty' ? (
             <>
               <Dropdown
-              arrowIcon={false}
-              inline
-             label={ <Avatar
-              alt='img'
-              img={currentuser.photourl}
-              rounded
-              status="online"
-              statusPosition="top-right"
-            />}
-            >
+                arrowIcon={false}
+                inline
+                label={<Avatar
+                  alt='img'
+                  img={currentuser.photourl}
+                  rounded
+                  status="online"
+                  statusPosition="top-right"
+                />}
+              >
                 <Dropdown.Header>
                   <span className='block text-sm '>@{currentuser.username}</span>
                   <span className='block text-sm font-medium truncate'>{currentuser.role}</span>
                 </Dropdown.Header>
 
                 <Dropdown.Item>
-                    view
+                  view
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handlesignout}>
-                    signout
+                  signout
                 </Dropdown.Item>
 
 
@@ -102,7 +101,6 @@ export default function Header() {
         <Navbar.Collapse>
 
 
-
           {/* home */}
           <Navbar.Link active={path === '/'} as={'div'} >
             <Link to={'/'}>
@@ -118,40 +116,39 @@ export default function Header() {
           </Navbar.Link>
           {/* project */}
 
-{currentuser && currentuser.role === 'student' && (
-  <Navbar.Link active={path === '/projects'} as={'div'}>
-            <Link to={'/'}>
-              View Data
-            </Link>
-          </Navbar.Link>
-)}
+          {currentuser && currentuser.role === 'student' && (
+            <Navbar.Link active={path === '/'} as={'div'}>
+              <Link to={'/'}>
+                View Data
+              </Link>
+            </Navbar.Link>
+          )}
 
-{currentuser && currentuser.role === 'falculty' && (
-  <Navbar.Link active={path === '/'} as={'div'}>
-            <Link to={'/'}>
-              DashBoard
-            </Link>
-          </Navbar.Link>
-)}
+          {currentuser && currentuser.role === 'falculty' && (
+            <Navbar.Link active={path === '/'} as={'div'}>
+              <Link to={'/'}>
+                DashBoard
+              </Link>
+            </Navbar.Link>
+          )}
 
-{currentuser && currentuser.isadmin && (
-  <Navbar.Link active={path === '/'} as={'div'}>
-            <Link to={'/'}>
-              AdminDashboard
-            </Link>
-          </Navbar.Link>
-)}
+          {currentuser && currentuser.isadmin && (
+            <Navbar.Link active={path === '/'} as={'div'}>
+              <Link to={'/'}>
+                AdminDashboard
+              </Link>
+            </Navbar.Link>
+          )}
 
 
-</Navbar.Collapse>
+        </Navbar.Collapse>
+
+
       </Navbar>
 
 
 
-
-
       <Outlet />
-
       <Footers />
     </div>
 

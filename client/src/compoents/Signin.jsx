@@ -1,56 +1,58 @@
 
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-// import { signinfailure,signinstart,signinsuccess } from '../../redux/user/userSlice'
-// import { useDispatch,useSelector } from 'react-redux'
-// import Oauth from '../compoents/Oauth'
+import { signinfailure, signinstart, signinsuccess } from '../redux/user/userslice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Signin() {
-  const [formdata,setformdata] = useState({})
-//   const {error,loading} = useSelector(state=>state.user)
+  const [formdata, setformdata] = useState({})
+  const { error, loading } = useSelector(state => state.user)
   const navigate = useNavigate()
-//   const dispatch = useDispatch()
-  
-  const handlechange = (e) =>{
+  const dispatch = useDispatch()
+
+  const handlechange = (e) => {
     setformdata({
-    ...formdata,
-    [e.target.id]:e.target.value.trim()
+      ...formdata,
+      [e.target.id]: e.target.value.trim()
     })
   }
-  
-  
-  const handlesubmit = async(e) =>{
-//     e.preventDefault()
-//     if(!formdata.email || !formdata.password){
-//       return dispatch(signinfailure('please fill out all fields'))
-//     }
-//     try {
-//       dispatch(signinstart())
-//      await axios.post('/auth/signin',formdata)
-//      .then(({data})=>{
-//       dispatch(signinsuccess(data))
-//       navigate('/')
-//      })
-//       .catch(e=>{
-//         if(e.response.data.success === false){
-//           dispatch(signinfailure(e.response.data.message))
-//         }
-//       })
-//     } catch (error) {
-//       // client side error eg: internet connection
-//       dispatch(signinfailure(error.message))
-//     }
-  
+
+
+  const handlesubmit = async (e) => {
+    e.preventDefault()
+    if (!formdata.username || !formdata.password) {
+      return dispatch(signinfailure('please fill out all fields'))
+      // console.log('all required')
+    }
+    try {
+      dispatch(signinstart())
+      await axios.post('/api/auth/signin', formdata)
+        .then(({ data }) => {
+          dispatch(signinsuccess(data))
+          navigate('/')
+          // console.log(data)
+        })
+        .catch(e => {
+          if (e.response.data.success === false) {
+            dispatch(signinfailure(e.response.data.message))
+          }
+          console.log(e)
+        })
+    } catch (error) {
+      // client side error eg: internet connection
+      dispatch(signinfailure(error.message))
+    }
+
   }
-  
-  
-  
-  
-    return (
-      <div className='min-h-screen mt-20'>
-       <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
+
+
+
+
+  return (
+    <div className='min-h-screen mt-20'>
+      <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
         {/* left side */}
         <div className='flex-1'>
           <Link to={'/'} className=' text-4xl  font-bold dark:text-white'>
@@ -58,12 +60,12 @@ export default function Signin() {
           </Link>
           <p className='text-sm mt-5 font-semibold'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente dolor numquam recusandae ratione enim in ipsum explicabo eius corporis minus porro sint aperiam, eligendi illo tempora cumque voluptate. Iure, aut!</p>
         </div>
-      
-      
+
+
         {/* right side */}
         <div className='flex-1'>
           <form onSubmit={handlesubmit} className='flex flex-col gap-4'>
-      {/* email */}
+            {/* email */}
             <div>
               <Label value='username' />
               <TextInput
@@ -73,8 +75,8 @@ export default function Signin() {
                 onChange={handlechange}
               />
             </div>
-      
-      {/* password */}
+
+            {/* password */}
             <div>
               <Label value='Password' />
               <TextInput
@@ -84,40 +86,31 @@ export default function Signin() {
                 onChange={handlechange}
               />
             </div>
-      
-      
-      
-      
-          <Button gradientDuoTone='purpleToPink' type='submit' >
-            {/* {
-              loading ? (
-                <>
-              <Spinner size='sm'/>
-              <span className='pl-3'>Loading...</span> 
-              </>
-              )
-              :"Sign In"
-            } */}
-      
-            signin
-          </Button>
-      {/* <Oauth/> */}
-      
-      
+
+            <Button gradientDuoTone='purpleToPink' type='submit' >
+              {
+                loading ? (
+                  <>
+                    <Spinner size='sm' />
+                    <span className='pl-3'>Loading...</span>
+                  </>
+                )
+                  : "Sign In"
+              }
+            </Button>
+
           </form>
-      
-          {/* {
+
+          {
             error && (
               <Alert className='mt-5' color='failure'>
                 {error}
               </Alert>
             )
-          } */}
+          }
         </div>
-      </div> 
-      
-      
-      
       </div>
-    )
-  }
+
+    </div>
+  )
+}

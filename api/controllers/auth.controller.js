@@ -60,6 +60,12 @@ export const signin = async(req, res, next) => {
 
 }
 
-
+export const signout = (req,res,next) =>{
+    try {
+        res.clearCookie('accesstoken').status(200).json('sign out')
+    } catch (error) {
+      return next(error)
+    }
+}
 
 

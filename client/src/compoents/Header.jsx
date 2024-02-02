@@ -1,11 +1,34 @@
-import { Button, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { AiOutlineFileSearch, AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon } from 'react-icons/fa'
 import Footers from './Footer'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import { signoutsucces } from '../redux/user/userslice'
+
 
 export default function Header() {
   const path = useLocation().pathname
+  const { currentuser } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const handlesignout=()=>{
+ 
+    try {
+      axios.post('/api/auth/signout')
+      .then(()=>{
+        dispatch(signoutsucces())
+      })
+      .catch(e=>console.log(e))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
+
   return (
     <div>
 
@@ -13,8 +36,8 @@ export default function Header() {
         <Link to={'/'} className='self-center text-sm sm:text-xl whitespace-nowrap font-semibold dark:text-white'>
           <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
             AAA
-            </span>
-            Collage
+          </span>
+          Collage
         </Link>
 
         {/* form */}
@@ -23,7 +46,6 @@ export default function Header() {
             type='text'
             placeholder='Search...'
             rightIcon={AiOutlineFileSearch}
-            // icon={<AiOutlineSearch/>}
             className='hidden lg:inline'
           />
         </form>
@@ -37,14 +59,50 @@ export default function Header() {
             <FaMoon />
           </Button>
 
-          <Link to={'/signin'}>
-            <Button gradientDuoTone='purpleToBlue' >
-              Sign In
-            </Button>
-          </Link>
+          {currentuser && currentuser.role === 'falculty' ? (
+            <>
+              <Dropdown
+              arrowIcon={false}
+              inline
+             label={ <Avatar
+              alt='img'
+              img={currentuser.photourl}
+              rounded
+              status="online"
+              statusPosition="top-right"
+            />}
+            >
+                <Dropdown.Header>
+                  <span className='block text-sm '>@{currentuser.username}</span>
+                  <span className='block text-sm font-medium truncate'>{currentuser.role}</span>
+                </Dropdown.Header>
+
+                <Dropdown.Item>
+                    view
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={handlesignout}>
+                    signout
+                </Dropdown.Item>
+
+
+              </Dropdown>
+            </>
+          ) : (
+            <Link to={'/signin'}>
+              <Button gradientDuoTone='purpleToBlue' >
+                Sign In
+              </Button>
+            </Link>
+          )}
+
+
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
+
+
+
           {/* home */}
           <Navbar.Link active={path === '/'} as={'div'} >
             <Link to={'/'}>
@@ -59,13 +117,33 @@ export default function Header() {
             </Link>
           </Navbar.Link>
           {/* project */}
-          <Navbar.Link active={path === '/projects'} as={'div'}>
-            <Link to={'/projects'}>
-              Projects
+
+{currentuser && currentuser.role === 'student' && (
+  <Navbar.Link active={path === '/projects'} as={'div'}>
+            <Link to={'/'}>
+              View Data
             </Link>
           </Navbar.Link>
-        </Navbar.Collapse>
+)}
 
+{currentuser && currentuser.role === 'falculty' && (
+  <Navbar.Link active={path === '/'} as={'div'}>
+            <Link to={'/'}>
+              DashBoard
+            </Link>
+          </Navbar.Link>
+)}
+
+{currentuser && currentuser.isadmin && (
+  <Navbar.Link active={path === '/'} as={'div'}>
+            <Link to={'/'}>
+              AdminDashboard
+            </Link>
+          </Navbar.Link>
+)}
+
+
+</Navbar.Collapse>
       </Navbar>
 
 
@@ -74,7 +152,7 @@ export default function Header() {
 
       <Outlet />
 
-      <Footers/>
+      <Footers />
     </div>
 
   )

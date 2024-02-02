@@ -32,7 +32,7 @@ export default function Createuser() {
 
 
 
-            await axios.post('/api/auth/createuser', formdata)
+            await axios.post('/auth/createuser', formdata)
                 .then(({ data }) => {
                     setloading(false)
                     // navigate('/signin')

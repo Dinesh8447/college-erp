@@ -5,7 +5,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import Footers from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { signoutsucces } from '../redux/user/userslice'
+import {signoutsuccess} from '../redux/user/userslice'
 import { themetoggle } from '../redux/theme/theme'
 
 
@@ -15,11 +15,12 @@ export default function Header() {
   const { theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
 
-  const handlesignout = () => {
+  const handlesignout = async() => {
     try {
       axios.post('/api/auth/signout')
         .then(() => {
-          dispatch(signoutsucces())
+          dispatch(signoutsuccess())
+          console.log('sign out')
         })
         .catch(e => console.log(e))
     } catch (error) {
@@ -54,39 +55,31 @@ export default function Header() {
         </Button>
 
         <div className='flex items-center gap-2 md:order-2'>
-          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => themetoggle()}>
+          <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => dispatch(themetoggle())}>
             {theme === 'light' ? <FaSun /> : <FaMoon />}
           </Button>
 
-          {currentuser && currentuser.role === 'falculty' ? (
-            <>
-              <Dropdown
-                arrowIcon={false}
-                inline
-                label={<Avatar
-                  alt='img'
-                  img={currentuser.photourl}
-                  rounded
-                  status="online"
-                  statusPosition="top-right"
-                />}
-              >
-                <Dropdown.Header>
-                  <span className='block text-sm '>@{currentuser.username}</span>
-                  <span className='block text-sm font-medium truncate'>{currentuser.role}</span>
-                </Dropdown.Header>
-
-                <Dropdown.Item>
-                  view
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={handlesignout}>
-                  signout
-                </Dropdown.Item>
-
-
-              </Dropdown>
-            </>
+          {currentuser ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={<Avatar
+                alt='img'
+                img={currentuser.photourl}
+                rounded
+                status="online"
+                statusPosition="top-right"
+              />}
+            >
+               
+              <Dropdown.Header>
+                <span className='block text-sm font-medium truncate'>{currentuser.role}</span>
+              </Dropdown.Header>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={handlesignout}>
+                signout
+              </Dropdown.Item>
+            </Dropdown>
           ) : (
             <Link to={'/signin'}>
               <Button gradientDuoTone='purpleToBlue' >
@@ -94,8 +87,6 @@ export default function Header() {
               </Button>
             </Link>
           )}
-
-
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
@@ -117,17 +108,23 @@ export default function Header() {
           {/* project */}
 
           {currentuser && currentuser.role === 'student' && (
-            <Navbar.Link active={path === '/'} as={'div'}>
-              <Link to={'/'}>
+            <>
+             <Navbar.Link active={path === '/viewstudentdata'} as={'div'}>
+              <Link to={'/viewstudentdata'}>
                 View Data
               </Link>
-            </Navbar.Link>
+             </Navbar.Link>
+
+              <label onClick={handlesignout} className='cursor-pointer'>
+                Sign Out
+              </label>
+            </>
           )}
 
           {currentuser && currentuser.role === 'falculty' && (
             <Navbar.Link active={path === '/'} as={'div'}>
               <Link to={'/'}>
-                DashBoard
+                FalcultyDashBoard
               </Link>
             </Navbar.Link>
           )}
@@ -140,12 +137,9 @@ export default function Header() {
             </Navbar.Link>
           )}
 
-
         </Navbar.Collapse>
 
-
       </Navbar>
-
 
 
       <Outlet />

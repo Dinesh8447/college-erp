@@ -80,6 +80,9 @@ export default function Header() {
                 signout
               </Dropdown.Item>
             </Dropdown>
+
+         
+
           ) : (
             <Link to={'/signin'}>
               <Button gradientDuoTone='purpleToBlue' >
@@ -93,7 +96,7 @@ export default function Header() {
 
 
           {/* home */}
-          <Navbar.Link active={path === '/'} as={'div'} >
+          <Navbar.Link  active={path === '/'} as={'div'} >
             <Link to={'/'}>
               Home
             </Link>
@@ -122,9 +125,9 @@ export default function Header() {
           )}
 
           {currentuser && currentuser.role === 'falculty' && (
-            <Navbar.Link active={path === '/'} as={'div'}>
-              <Link to={'/'}>
-                FalcultyDashBoard
+            <Navbar.Link active={path === '/dashboard'} as={'div'}>
+              <Link to={'/dashboard'}>
+                DashBoard
               </Link>
             </Navbar.Link>
           )}

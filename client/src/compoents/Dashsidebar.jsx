@@ -63,24 +63,29 @@ const { currentuser, error, loading } = useSelector(state => state.user)
                 </Sidebar.Item>
                 </Link>
 
-                <Link to='/dashboard?tab=createStudent'>
-                    
+                <Link to='/dashboard?tab=createStudent'>  
                 <Sidebar.Item as='div' className='font-semibold'>
                     CreateStudent
                 </Sidebar.Item>
                 </Link>
 
+                <Link to='/dashboard?tab=createTeacher'>  
                 <Sidebar.Item as='div'>
                     Createteacher
                 </Sidebar.Item>
+                </Link>
                 
+                <Link to='/dashboard?tab=createAdmin'>  
                 <Sidebar.Item as='div'>
                     createadmin
                 </Sidebar.Item>
+                </Link>
 
+                <Link to='/dashboard?tab=createNotice'>  
                 <Sidebar.Item as='div'>
                     createnotice
                 </Sidebar.Item>
+                </Link>
                 
                 <Sidebar.Item as='div'>
                     Signout
@@ -89,11 +94,6 @@ const { currentuser, error, loading } = useSelector(state => state.user)
             </Sidebar.ItemGroup>
         </Sidebar.Items>
     )}
-
-
-
-
-
 
     </Sidebar>
   )

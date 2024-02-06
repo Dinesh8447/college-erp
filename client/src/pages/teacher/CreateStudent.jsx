@@ -35,7 +35,7 @@ export default function CreateStudent() {
   const handlesubmit = async(e) =>{
     e.preventDefault()
     try {
-        axios.post('/api/student/createstudent',formdata)
+        axios.post('/api/admin/createstudent',formdata)
         .then(({data})=>{
             console.log('post')
             // navigate('/dashboard?tab=createstudentlogin')
@@ -83,6 +83,10 @@ export default function CreateStudent() {
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
                         <input  onChange={handlechange} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@rollNo.com"  />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+                        <input  onChange={handlechange} type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="****"  />
                     </div>
 
                     <div>

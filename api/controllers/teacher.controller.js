@@ -67,3 +67,18 @@ export const createtimetable = async (req, res, next) => {
         next(error)
     }
 }
+
+
+
+export const getstudentdata = async (req,res,next) =>{
+    const {dep} = req.query
+    try {
+        const data = await  studentdb.find({"department":dep})
+        res.status(200).json(data)
+        
+    } catch (error) {
+        next(error)
+    }
+
+
+}

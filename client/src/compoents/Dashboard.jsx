@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Dashsidebar from './Dashsidebar'
 import CreateStudent from '../pages/teacher/CreateStudent'
+import CreateTeacher from '../pages/admin/CreateTeacher'
+import Createadmin from '../pages/admin/Createadmin'
+import Createnotice from '../pages/admin/Createnotice'
 
 
 export default function Dashboard() {
@@ -17,11 +20,14 @@ export default function Dashboard() {
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
       <div className='md:w-56'>
-        {/* sidebar */}
+        {/*left sidebar */}
         <Dashsidebar />
       </div>
       {/* right side */}
       {tab === 'createStudent' && <CreateStudent />}
+      {tab === 'createTeacher' && <CreateTeacher/>}
+      {tab === 'createAdmin' && <Createadmin/>}
+      {tab === 'createNotice' && <Createnotice/>}
 
     </div>
   )

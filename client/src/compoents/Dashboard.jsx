@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Dashsidebar from './Dashsidebar'
-import CreateStudent from '../pages/faculty/CreateStudent'
-import Createstudentlogin from '../pages/faculty/Createstudentlogin'
+import CreateStudent from '../pages/teacher/CreateStudent'
+
 
 export default function Dashboard() {
-    const location = useLocation()
-    const[tab,settab] = useState('')
-    useEffect(()=>{
-        const urlparams = new URLSearchParams(location.search)
-        const tabfromurl = urlparams.get('tab')
-        if(tabfromurl){
-            settab(tabfromurl)
-        }
-    },[location.search])
+  const location = useLocation()
+  const [tab, settab] = useState('')
+  useEffect(() => {
+    const urlparams = new URLSearchParams(location.search)
+    const tabfromurl = urlparams.get('tab')
+    if (tabfromurl) {
+      settab(tabfromurl)
+    }
+  }, [location.search])
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
       <div className='md:w-56'>
         {/* sidebar */}
-            <Dashsidebar/>
+        <Dashsidebar />
       </div>
       {/* right side */}
-      {tab === 'createStudent' && <CreateStudent/>}
-      {tab === 'createstudentlogin' && <Createstudentlogin/>}
+      {tab === 'createStudent' && <CreateStudent />}
 
     </div>
   )

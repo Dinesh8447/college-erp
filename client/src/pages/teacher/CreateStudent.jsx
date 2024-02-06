@@ -38,7 +38,7 @@ export default function CreateStudent() {
         axios.post('/api/student/createstudent',formdata)
         .then(({data})=>{
             console.log('post')
-            navigate('/dashboard?tab=createstudentlogin')
+            // navigate('/dashboard?tab=createstudentlogin')
         })
         .catch(e=>console.log(e))
         

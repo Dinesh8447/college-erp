@@ -17,12 +17,12 @@ export default function Header() {
 
   const handlesignout = async() => {
     try {
-      axios.post('/api/auth/signout')
-        .then(() => {
+      // axios.post('/api/auth/signout')
+      //   .then(() => {
           dispatch(signoutsuccess())
           console.log('sign out')
-        })
-        .catch(e => console.log(e))
+        // })
+        // .catch(e => console.log(e))
     } catch (error) {
       console.log(error)
     }
@@ -80,11 +80,8 @@ export default function Header() {
                 signout
               </Dropdown.Item>
             </Dropdown>
-
-         
-
           ) : (
-            <Link to={'/signin'}>
+            <Link to={'/signinoption'}>
               <Button gradientDuoTone='purpleToBlue' >
                 Sign In
               </Button>
@@ -124,7 +121,7 @@ export default function Header() {
             </>
           )}
 
-          {currentuser && currentuser.role === 'falculty' && (
+          {currentuser && currentuser.role === 'teacher' && (
             <Navbar.Link active={path === '/dashboard'} as={'div'}>
               <Link to={'/dashboard'}>
                 DashBoard
@@ -132,9 +129,9 @@ export default function Header() {
             </Navbar.Link>
           )}
 
-          {currentuser && currentuser.isadmin && (
-            <Navbar.Link active={path === '/'} as={'div'}>
-              <Link to={'/'}>
+          {currentuser && currentuser.role === 'admin' && (
+            <Navbar.Link active={path === '/dashboard'} as={'div'}>
+              <Link to={'/dashboard'}>
                 AdminDashboard
               </Link>
             </Navbar.Link>

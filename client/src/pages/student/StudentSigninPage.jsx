@@ -3,7 +3,7 @@ import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { signinfailure, signinstart, signinsuccess } from '../../redux/user/userslice'
+import { signinfailure, signinstart, signinsuccess } from '../../redux/user/userslice.js'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Signin() {
@@ -22,13 +22,13 @@ export default function Signin() {
 
   const handlesubmit = async (e) => {
     e.preventDefault()
-    if (!formdata.username || !formdata.password) {
+    if (!formdata.rollno || !formdata.password) {
       return dispatch(signinfailure('please fill out all fields'))
       // console.log('all required')
     }
     try {
       dispatch(signinstart())
-      await axios.post('/api/auth/signin', formdata)
+      await axios.post('/api/student/signin', formdata)
         .then(({ data }) => {
           dispatch(signinsuccess(data))
           navigate('/')
@@ -48,6 +48,8 @@ export default function Signin() {
   }
 
 
+
+
   return (
     <div className='min-h-screen mt-20'>
       <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
@@ -56,7 +58,9 @@ export default function Signin() {
           <Link to={'/'} className=' text-4xl  font-bold dark:text-white'>
             <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Mern</span>Blog
           </Link>
-          <p className='text-sm mt-5 font-semibold'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente dolor numquam recusandae ratione enim in ipsum explicabo eius corporis minus porro sint aperiam, eligendi illo tempora cumque voluptate. Iure, aut!</p>
+          <p className='text-sm mt-5 font-semibold'>
+            student signin page
+          </p>
         </div>
 
 
@@ -65,10 +69,11 @@ export default function Signin() {
           <form onSubmit={handlesubmit} className='flex flex-col gap-4'>
             {/* email */}
             <div>
-              <Label value='Rollno' />
+              <Label value='RollNo' />
               <TextInput
-                type='number'
-                placeholder='RollNo'
+                type='text'
+                placeholder='201102'
+                id='rollno'
                 onChange={handlechange}
               />
             </div>
@@ -97,6 +102,7 @@ export default function Signin() {
             </Button>
 
           </form>
+
           {
             error && (
               <Alert className='mt-5' color='failure'>

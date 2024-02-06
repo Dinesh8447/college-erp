@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FalcultyDashboard() {
+export default function TeacherDashboard() {
   return (
     <div>
       falcultydashboard

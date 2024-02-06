@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 
-export default function Createuser() {
+export default function Createstudentlogin() {
     const [formdata, setformdata] = useState({})
     const [error, seterror] = useState(null)
     const [loading, setloading] = useState(false)
@@ -22,7 +22,7 @@ export default function Createuser() {
 
     const handlesubmit = async (e) => {
         e.preventDefault()
-        if (!formdata.username || !formdata.role || !formdata.password) {
+        if (!formdata.rollno || !formdata.password) {
             return seterror('please fill out all fields')
         }
         try {
@@ -31,7 +31,7 @@ export default function Createuser() {
             await axios.post('/api/auth/createuser', formdata)
                 .then(({ data }) => {
                     setloading(false)
-                    // navigate('/signin')
+                    navigate('/dashboard?tab=createStudent')
                     console.log(data)
                 })
                 .catch(e => {
@@ -48,39 +48,29 @@ export default function Createuser() {
 
 
     return (
-        <div className='min-h-screen mt-20'>
-            <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
+        <div className=' w-96 m-auto'>
+            <div className='flex p-3 gap-5  md:flex-row md:items-center'>
                 {/* left side */}
                 <div className='flex-1'>
-                    <Link to={'/'} className=' text-4xl  font-bold dark:text-white'>
-                        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-                            AAA</span>
-                        college
-                    </Link>
-                    <p className='text-sm mt-5 font-semibold'>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Sapiente dolor numquam recusandae ratione
-                        enim in ipsum explicabo eius corporis minus
-                        porro sint aperiam, eligendi illo tempora cumque voluptate. Iure, aut!</p>
+                    <p className='text-2xl mt-5  font-bold'>
+                       create login id for this student 
+                    </p>
                 </div>
-
 
                 {/* right side */}
                 <div className='flex-1'>
                     <form onSubmit={handlesubmit} className='flex flex-col gap-4'>
-                        {/* username */}
-                        <div>
-                            <Label value='Username' />
+                       {/* rollno */}
+                       <div>
+                            <Label value='rollno'/>
                             <TextInput
                                 required
-                                type='text'
-                                placeholder='Username'
-                                id='username'
+                                type='number'
+                                placeholder='RollNo'
+                                id='rollno'
                                 onChange={handlechange}
                             />
                         </div>
-
-
 
                         {/* password */}
                         <div>
@@ -92,38 +82,6 @@ export default function Createuser() {
                                 id='password'
                                 onChange={handlechange}
                             />
-                        </div>
-
-                        {/* rollno */}
-                        <div>
-                            <Label value='rollno'/>
-                            <TextInput
-                                required
-                                type='number'
-                                placeholder='RollNo'
-                                id='rollno'
-                                onChange={handlechange}
-                            />
-                        </div>
-
-                        {/* role */}
-
-                        <div>
-                            <Label value='Select Role' />
-                            <Select id='role' onChange={handlechange} required>
-                                <option>--select user role--</option>
-                                <option value='student'>Student</option>
-                                <option value='falculty'>Falculty</option>
-                            </Select>
-                        </div>
-
-                        <div>
-                            <Label value='Select Role' />
-                            <Select id='department' onChange={handlechange} required>
-                                <option>--Select Department--</option>
-                                <option value='mca'>MCA</option>
-                                <option value='mba'>MBA</option>
-                            </Select>
                         </div>
 
 

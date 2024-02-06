@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Dashsidebar from './Dashsidebar'
 import CreateStudent from '../pages/faculty/CreateStudent'
+import Createstudentlogin from '../pages/faculty/Createstudentlogin'
 
 export default function Dashboard() {
     const location = useLocation()
@@ -20,7 +21,9 @@ export default function Dashboard() {
             <Dashsidebar/>
       </div>
       {/* right side */}
-        {tab === 'createStudent' && <CreateStudent/>}
+      {tab === 'createStudent' && <CreateStudent/>}
+      {tab === 'createstudentlogin' && <Createstudentlogin/>}
+
     </div>
   )
 }

@@ -10,7 +10,7 @@ export default function Dashsidebar() {
     useEffect(()=>{
         const urlparams = new URLSearchParams(location.search)
         const tabfromurl = urlparams.get('tab')
-        console.log(tabfromurl)
+        // console.log(tabfromurl)
         if(tabfromurl){
             settab(tabfromurl)
         }
@@ -23,26 +23,26 @@ export default function Dashsidebar() {
         <Sidebar.Items>
             <Sidebar.ItemGroup>
                 <Link to='/dashboard?tab=profile'>
-                <Sidebar.Item className='font-semibold' active={tab === 'profile'} icon={FaHospitalUser} label={'Faculty'} labelColor='dark'>
+                <Sidebar.Item as='div' className='font-semibold' active={tab === 'profile'} icon={FaHospitalUser} label={'Faculty'} labelColor='dark'>
                     profile
                 </Sidebar.Item>
                 </Link>
 
                 <Link to='/dashboard?tab=createStudent'>
-                <Sidebar.Item className='font-semibold'>
+                <Sidebar.Item as='div' className='font-semibold'>
                     CreateStudent
                 </Sidebar.Item>
                 </Link>
 
-                <Sidebar.Item>
+                <Sidebar.Item as='div'>
                     editstudent
                 </Sidebar.Item>
                 
-                <Sidebar.Item>
+                <Sidebar.Item as='div'>
                     viwestudents
                 </Sidebar.Item>
                 
-                <Sidebar.Item>
+                <Sidebar.Item as='div'>
                     Signout
                 </Sidebar.Item>
             

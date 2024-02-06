@@ -10,6 +10,8 @@ import FalcultyDashboard from "./pages/faculty/FalcultyDashboard"
 import PrivateRoute from "./compoents/PrivateRoute"
 import Dashboard from "./compoents/Dashboard"
 import Home from "./compoents/Home"
+import Studentloginform from "./pages/student/Studentloginform"
+import Createstudentlogin from "./pages/faculty/Createstudentlogin"
 
 
 // const { currentuser, error, loading } = useSelector(state => state.user)
@@ -24,6 +26,8 @@ function App() {
         <Route path="/signin" element={<Signin />} />
 
         <Route path="/createuser" element={<Createuser />}/>
+        <Route path="/studentloginform" element={<Studentloginform />}/>
+        <Route path="/createstudentlogin" element={<Createstudentlogin />}/>
 
 <Route element={<PrivateRoute/>}>
         {/* student */}

@@ -6,9 +6,9 @@ import errorhandler from '../utils/error.js'
 
 export const adminregister = async(req,res,next) =>{
 
-    const {username,password} = req.body
+    const {username,password,photourl} = req.body
     try {
-        const data = await adminauthmodel.create({username,password})
+        const data = await adminauthmodel.create({username,password,photourl})
         await data.save()
         res.status(200).json(data)
     } catch (error) {

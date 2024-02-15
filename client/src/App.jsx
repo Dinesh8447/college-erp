@@ -12,6 +12,11 @@ import StudentSignPage from './pages/student/StudentSigninPage'
 import SigninOptions from "./compoents/SigninOptions"
 import TeacherSignPage from './pages/teacher/TeacherSigninPage'
 import AdminSigninPage from "./pages/admin/AdminSigninPage"
+import TStudentDataShow from "./pages/teacher/TStudentDataShow"
+import Adminprivateroute from "./pages/admin/Adminprivateroute"
+import Teacherprivateroute from "./pages/teacher/Teacherprivateroute"
+import Studentprivateroute from "./pages/student/studentprivateroute"
+
 // const { currentuser, error, loading } = useSelector(state => state.user)
 
 
@@ -27,16 +32,24 @@ function App() {
 
 
         {/* student */}
+        {/* <Route element={<Studentprivateroute/>}> */}
         <Route path="/studentsigninpage" element={<StudentSignPage />} />
-        <Route path="viewstudentdata" element={<ViewStudentData />} />
+        {/* </Route> */}
 
+        <Route path="viewstudentdata" element={<ViewStudentData />} />
 
         {/* teacher */}
         {/* <Route path="/createuser" element={<Createuser />} /> */}
+        {/* <Route element={<Teacherprivateroute/>}>   */}
         <Route path="/teachersignpage" element={<TeacherSignPage />} />
+        {/* </Route> */}
 
-{/* admin */}
+        {/* admin */}
+        {/* <Route element={<Adminprivateroute/>}> */}
         <Route path="/adminsignpage" element={<AdminSigninPage />} />
+        {/* </Route> */}
+
+
 
 
         {/* <Route element={<PrivateRoute />}> */}
@@ -47,6 +60,8 @@ function App() {
         <Route path="/dashboard?" element={<Dashboard />} />
 
         {/* </Route> */}
+
+        <Route path="/studentdatashow" element={<TStudentDataShow/>} />
       </Route>
     </Routes>
   )

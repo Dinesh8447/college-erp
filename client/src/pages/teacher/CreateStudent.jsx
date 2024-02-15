@@ -54,7 +54,9 @@ export default function CreateStudent() {
             <form onSubmit={handlesubmit} >
                 <input type="file"  accept='image/*' hidden ref={filepickerref} onChange={handleimagechange} />
                 <div className=" flex  justify-center  cursor-pointer overflow-hidden">
-                <img onClick={()=>filepickerref.current.click()} className='rounded-full w-40 h-40 m-3 object-cover border-8 border-[lightgray] ' src={imagefileurl || defaultimage} alt="img"/>
+                <img onClick={()=>filepickerref.current.click()}
+                 className='rounded-full w-40 h-40 m-3 object-cover border-8 border-[lightgray] ' 
+                 src={imagefileurl || defaultimage} alt="img"/>
                 </div>
                 <div className="grid gap-6 mb-6 lg:grid-cols-2">
                     <div>

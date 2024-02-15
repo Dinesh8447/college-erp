@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const adminauthschema  = new mongoose.Schema({
     username:String,
     password:String,
+    photourl:String,
     role:{
         type:String,
         default:'admin'

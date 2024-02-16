@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import defaultimage from '../../assets/profile.jpg'
 import axios from 'axios'
+import ImageProfile from '../../compoents/ImageProfile'
 
 export default function CreateTeacher() {
 
     const [formdata,setformdata] = useState({})
-    const [imagefile,setimagefile] = useState(null)
+    // const [imagefile,setimagefile] = useState(null)
     const [imagefileurl,setimagefileurl] = useState(null)
-    const filepickerref = useRef()
+    // const filepickerref = useRef()
     const navigate = useNavigate()
 // console.log(imagefile)
 // console.log(imagefileurl)
@@ -25,6 +26,7 @@ export default function CreateTeacher() {
   const handlechange = (e) =>{
     setformdata({
         ...formdata,
+        photourl: imagefileurl,
         [e.target.id]:e.target.value
     })
   }
@@ -57,10 +59,8 @@ export default function CreateTeacher() {
     <div className="max-w-2xl mx-auto bg-white ">
     <h1 className='text-center text-3xl p-3 font-bold'>Create Teacher</h1>
     <form onSubmit={handlesubmit} >
-        <input type="file"  accept='image/*' hidden ref={filepickerref} onChange={handleimagechange} />
-        <div className=" flex  justify-center  cursor-pointer overflow-hidden">
-        <img onClick={()=>filepickerref.current.click()} className='rounded-full w-40 h-40 m-3 object-cover border-8 border-[lightgray] ' src={imagefileurl || defaultimage} alt="img"/>
-        </div>
+                <ImageProfile imagefileurl={imagefileurl} setimagefileurl={setimagefileurl} />
+
         <div className="grid gap-6 mb-6 lg:grid-cols-2">
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
@@ -88,7 +88,13 @@ export default function CreateTeacher() {
 
             <div>
                 <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Department</label>
-                <input  onChange={handlechange} type="text" id="department" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="MCA"  />
+                <input  
+                onChange={handlechange} 
+                type="text" 
+                id="department" 
+                placeholder="mca"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  />
             </div>
 
             <div>

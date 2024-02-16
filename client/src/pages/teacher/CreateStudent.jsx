@@ -1,36 +1,20 @@
-import React, { useRef, useState } from 'react'
-import defaultimage from '../../assets/profile.jpg'
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ImageProfile from '../../compoents/ImageProfile';
 
 export default function CreateStudent() {
     const [formdata,setformdata] = useState({})
-    const [imagefile,setimagefile] = useState(null)
     const [imagefileurl,setimagefileurl] = useState(null)
-    const filepickerref = useRef()
     const navigate = useNavigate()
-// console.log(imagefile)
-// console.log(imagefileurl)
-// console.log(formdata)
-
-  const  handleimagechange = (e) =>{
-    const file = e.target.files[0]
-    if(file){
-        setimagefile(file)
-        setimagefileurl(URL.createObjectURL(file))
-    }
-  }
 
   const handlechange = (e) =>{
     setformdata({
         ...formdata,
+        photourl: imagefileurl,
         [e.target.id]:e.target.value
     })
   }
-
-
-
 
   const handlesubmit = async(e) =>{
     e.preventDefault()
@@ -46,18 +30,13 @@ export default function CreateStudent() {
         console.log(error)
     }
   }
-
-
+  
     return (
         <div className="max-w-2xl mx-auto bg-white ">
             <h1 className='text-center text-3xl p-3 font-bold'>Create Student</h1>
             <form onSubmit={handlesubmit} >
-                <input type="file"  accept='image/*' hidden ref={filepickerref} onChange={handleimagechange} />
-                <div className=" flex  justify-center  cursor-pointer overflow-hidden">
-                <img onClick={()=>filepickerref.current.click()}
-                 className='rounded-full w-40 h-40 m-3 object-cover border-8 border-[lightgray] ' 
-                 src={imagefileurl || defaultimage} alt="img"/>
-                </div>
+            <ImageProfile imagefileurl={imagefileurl} setimagefileurl={setimagefileurl} />
+               
                 <div className="grid gap-6 mb-6 lg:grid-cols-2">
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>

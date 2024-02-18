@@ -5,23 +5,10 @@ import axios from 'axios'
 import ImageProfile from '../../compoents/ImageProfile'
 
 export default function CreateTeacher() {
-
     const [formdata,setformdata] = useState({})
-    // const [imagefile,setimagefile] = useState(null)
     const [imagefileurl,setimagefileurl] = useState(null)
-    // const filepickerref = useRef()
     const navigate = useNavigate()
-// console.log(imagefile)
-// console.log(imagefileurl)
-// console.log(formdata)
 
-  const  handleimagechange = (e) =>{
-    const file = e.target.files[0]
-    if(file){
-        setimagefile(file)
-        setimagefileurl(URL.createObjectURL(file))
-    }
-  }
 
   const handlechange = (e) =>{
     setformdata({
@@ -48,12 +35,6 @@ export default function CreateTeacher() {
         console.log(error)
     }
   }
-
-
-
-
-
-
 
   return (
     <div className="max-w-2xl mx-auto bg-white ">

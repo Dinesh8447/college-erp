@@ -11,6 +11,7 @@ const schema  = new mongoose.Schema({
     gender:String,
     address:String,
     password:String,
+    fees:String,
     role:{
         type:String,
         default:'student'

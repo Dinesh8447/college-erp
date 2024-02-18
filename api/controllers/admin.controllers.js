@@ -72,3 +72,41 @@ export const createnotice = async (req, res, next) => {
     }
 }
 
+export const updatestudent = async (req, res, next) => {
+    const {studentid} = req.params
+
+    try {
+        const notic = await studentdb.findByIdAndUpdate(studentid)
+        res.json(notic)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const  getallstudent = async(req,res,next)=>{
+try {
+   const student =  await studentdb.find()
+   res.status(200).json(student)
+} catch (error) {
+    next(error)
+}
+}
+
+export const  getallteacher = async(req,res,next)=>{
+    try {
+        const teacher =  await teacherdb.find()
+        res.status(200).json(teacher)
+    } catch (error) {
+    next(error)
+    }
+    }
+
+
+    export const  getalladmin = async(req,res,next)=>{
+        try {
+            const admin =  await adminauthmodel.find()
+            res.status(200).json(admin)
+        } catch (error) {
+        next(error)
+        }
+        }

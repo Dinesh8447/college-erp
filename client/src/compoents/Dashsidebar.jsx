@@ -86,9 +86,16 @@ const { currentuser, error, loading } = useSelector(state => state.user)
                     createnotice
                 </Sidebar.Item>
                 </Link>
+
                 <Link to='/dashboard?tab=viewstudenttable'>  
                 <Sidebar.Item as='div'>
                     viewstudenttable
+                </Sidebar.Item>
+                </Link>
+
+                <Link to='/dashboard?tab=viewteachertable'>  
+                <Sidebar.Item as='div'>
+                    viewteachertable
                 </Sidebar.Item>
                 </Link>
                 

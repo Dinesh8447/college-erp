@@ -6,6 +6,7 @@ import CreateTeacher from '../pages/admin/CreateTeacher'
 import Createadmin from '../pages/admin/Createadmin'
 import Createnotice from '../pages/admin/Createnotice'
 import ViewStudentTable from './ViewStudentTable'
+import ViewTeacherTable from './ViewTeacherTable'
 
 
 export default function Dashboard() {
@@ -30,6 +31,7 @@ export default function Dashboard() {
       {tab === 'createAdmin' && <Createadmin/>}
       {tab === 'createNotice' && <Createnotice/>}
       {tab === 'viewstudenttable' && <ViewStudentTable/>}
+      {tab === 'viewteachertable' && <ViewTeacherTable/>}
 
     </div>
   )

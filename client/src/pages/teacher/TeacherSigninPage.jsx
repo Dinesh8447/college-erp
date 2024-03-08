@@ -51,68 +51,64 @@ export default function Signin() {
 
 
   return (
-    <div className='min-h-screen mt-20'>
-      <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
-        {/* left side */}
-        <div className='flex-1'>
-          <Link to={'/'} className=' text-4xl  font-bold dark:text-white'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Mern</span>Blog
-          </Link>
-          <p className='text-sm mt-5 font-semibold'>
-          teacher signin page
-          </p>
+
+    <div className="bg-white dark:bg-gray-900">
+      <div className="flex justify-center h-screen">
+        <div className="hidden bg-cover lg:block lg:w-2/3 bg-[url('https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')]" >
+          <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+            <div>
+              <h2 className="text-4xl font-bold text-white">Brand</h2>
+              <p className="max-w-xl mt-3 text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. In autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus molestiae</p>
+            </div>
+          </div>
         </div>
 
+        <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+          <div className="flex-1">
+            <div className="text-center">
+              <h2 className="text-4xl font-bold text-center text-gray-700 dark:text-white">Brand</h2>
 
-        {/* right side */}
-        <div className='flex-1'>
-          <form onSubmit={handlesubmit} className='flex flex-col gap-4'>
-            {/* email */}
-            <div>
-              <Label value='Email' />
-              <TextInput
-                type='text'
-                placeholder='john@gmail.com'
-                id='email'
-                onChange={handlechange}
-              />
+              <p className="mt-3 text-gray-500 dark:text-gray-300">Sign in to access your account</p>
             </div>
 
-            {/* password */}
-            <div>
-              <Label value='Password' />
-              <TextInput
-                type='password'
-                placeholder='Password'
-                id='password'
-                onChange={handlechange}
-              />
-            </div>
+            <div className="mt-8">
+              <form onSubmit={handlesubmit}>
+                <div>
+                  <label  className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
+                  <input type="email" onChange={handlechange} name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                </div>
+                <div className="mt-6">
+                  <label  className="text-sm text-gray-600 dark:text-gray-200">Password</label>
+                  <input type="password" onChange={handlechange} name="password" id="password" placeholder="Your Password" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                </div>
 
-            <Button gradientDuoTone='purpleToPink' type='submit' >
+                <div className="mt-6">
+                  <Button gradientDuoTone='purpleToPink' 
+                  className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50' 
+                  type='submit' >
+                    {
+                      loading ? (
+                        <>
+                          <Spinner size='sm' />
+                          <span className='pl-3'>Loading...</span>
+                        </>
+                      )
+                        : "Sign In"
+                    }
+                  </Button>
+                </div>
+              </form>
               {
-                loading ? (
-                  <>
-                    <Spinner size='sm' />
-                    <span className='pl-3'>Loading...</span>
-                  </>
+                error && (
+                  <Alert className='mt-5' color='failure'>
+                    {error}
+                  </Alert>
                 )
-                  : "Sign In"
               }
-            </Button>
-
-          </form>
-
-          {
-            error && (
-              <Alert className='mt-5' color='failure'>
-                {error}
-              </Alert>
-            )
-          }
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   )
 }

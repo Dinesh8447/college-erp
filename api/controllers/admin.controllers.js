@@ -76,12 +76,85 @@ export const updatestudent = async (req, res, next) => {
     const {studentid} = req.params
 
     try {
-        const notic = await studentdb.findByIdAndUpdate(studentid)
+            const {name,
+                rollno,
+                phone,
+                dob,
+                email,
+                department,
+                arrear,
+                gender,
+                address,
+                password,
+                fees,
+                role,
+                photourl} = req.body
+        const notic = await studentdb.findByIdAndUpdate(studentid,{name,
+            rollno,
+            phone,
+            dob,
+            email,
+            department,
+            arrear,
+            gender,
+            address,
+            password,
+            fees,
+            role,
+            photourl},{new:true})
         res.json(notic)
     } catch (error) {
         next(error)
     }
 }
+
+
+
+export const updateteacher = async (req, res, next) => {
+    const {teacherid} = req.params
+
+    try {
+            const {name,
+                phone,
+                email,
+                department,
+                gender,
+                photourl} = req.body
+        const notic = await teacherdb.findByIdAndUpdate(teacherid,{name,
+            phone,
+            email,
+            department,
+            gender,
+            photourl},{new:true})
+        res.json(notic)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deletestudent = async(req,res,next) =>{
+    const {studentid} = req.params
+    try {
+        await studentdb.findByIdAndDelete(studentid)
+        res.json("deleted")
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteteacher = async(req,res,next) =>{
+    const {teacherid} = req.params
+    try {
+        await teacherdb.findByIdAndDelete(teacherid)
+        res.json("deleted")
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
+
 
 export const  getallstudent = async(req,res,next)=>{
 try {

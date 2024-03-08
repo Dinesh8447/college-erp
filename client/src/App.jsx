@@ -16,6 +16,7 @@ import TStudentDataShow from "./pages/teacher/TStudentDataShow"
 import Adminprivateroute from "./pages/admin/Adminprivateroute"
 import Teacherprivateroute from "./pages/teacher/Teacherprivateroute"
 import Studentprivateroute from "./pages/student/studentprivateroute"
+import Empty from "./compoents/empty"
 
 // const { currentuser, error, loading } = useSelector(state => state.user)
 
@@ -50,7 +51,7 @@ function App() {
         {/* </Route> */}
 
 
-
+<Route path='/empty' element={<Empty/>}/>
 
         {/* <Route element={<PrivateRoute />}> */}
         {/* student */}

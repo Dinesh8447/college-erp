@@ -1,6 +1,9 @@
 import express from "express";
 import { createstudent, createteacher, createnotice,adminregister,adminsignin 
     ,updatestudent,
+    updateteacher,
+    deletestudent,
+    deleteteacher,
     getallstudent,
     getallteacher,
     getalladmin,    
@@ -21,9 +24,9 @@ router.get('/getallteacher',getallteacher)
 router.get('/getalladmin',getalladmin)
 
 router.put('/updatestudent/:studentid',updatestudent)
-// router.put('/updateteacher/:teacherid',updateteacher)
-// router.delete('/deleteteacher/:studentid',deletestudent)
-// router.delete('/deleteteacher/:teacherid',deleteteacher)
+router.put('/updateteacher/:teacherid',updateteacher)
+router.delete('/deletestudent/:studentid',deletestudent)
+router.delete('/deleteteacher/:teacherid',deleteteacher)
 
 
 export default router

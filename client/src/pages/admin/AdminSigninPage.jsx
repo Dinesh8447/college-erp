@@ -46,73 +46,41 @@ export default function AdminSigninPage() {
     }
 
   }
-
-
-
-
   return (
-    <div className='min-h-screen mt-20'>
-      <div className='flex p-3 max-w-3xl mx-auto gap-5 flex-col md:flex-row md:items-center'>
-        {/* left side */}
-        <div className='flex-1'>
-          <Link to={'/'} className=' text-4xl  font-bold dark:text-white'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Mern</span>Blog
-          </Link>
-          <p className='text-sm mt-5 font-semibold'>
-          admin signin page
-          </p>
-        </div>
+    <div className="w-full min-h-screen bg-cover  flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[url('https://smit.edu.in/engineering/wp-content/uploads/2019/04/abtus.jpg')]">
+      <div className="w-full sm:max-w-md p-5 mx-auto">
+        <h2 className="mb-12 text-center text-black text-4xl font-extrabold">Admin Login </h2>
+        <form onSubmit={handlesubmit}>
+          <div className="mb-4">
+            <label className="block mb-1 font-semibold  text-white" for="email">UserName</label>
+            <input type='text'
+              placeholder='admin23'
+              id='username'
+              onChange={handlechange}
+              className="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1 font-semibold text-white" for="password">Password</label>
+            <input type='password'
+              placeholder='Password'
+              id='password'
+              onChange={handlechange}
+              className="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+          </div>
 
-
-        {/* right side */}
-        <div className='flex-1'>
-          <form onSubmit={handlesubmit} className='flex flex-col gap-4'>
-            {/* email */}
-            <div>
-              <Label value='Username' />
-              <TextInput
-                type='text'
-                placeholder='admin23'
-                id='username'
-                onChange={handlechange}
-              />
-            </div>
-
-            {/* password */}
-            <div>
-              <Label value='Password' />
-              <TextInput
-                type='password'
-                placeholder='Password'
-                id='password'
-                onChange={handlechange}
-              />
-            </div>
-
-            <Button gradientDuoTone='purpleToPink' type='submit' >
-              {
-                loading ? (
-                  <>
-                    <Spinner size='sm' />
-                    <span className='pl-3'>Loading...</span>
-                  </>
-                )
-                  : "Sign In"
-              }
-            </Button>
-
-          </form>
-
-          {
-            error && (
-              <Alert className='mt-5' color='failure'>
-                {error}
-              </Alert>
-            )
-          }
-        </div>
+          <Button className="w-full " gradientDuoTone='purpleToPink' type='submit' >
+            {
+              loading ? (
+                <>
+                  <Spinner size='sm' />
+                  <span className='pl-3'>Loading...</span>
+                </>
+              )
+                : "Sign In"
+            }
+          </Button>
+        </form>
       </div>
-
     </div>
   )
 }

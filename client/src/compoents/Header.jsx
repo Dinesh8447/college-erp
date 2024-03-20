@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineFileSearch, AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import Footers from './Footer'
@@ -14,12 +14,13 @@ export default function Header() {
   const { currentuser } = useSelector(state => state.user)
   const { theme } = useSelector(state => state.theme)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate();
   const handlesignout = async() => {
     try {
       // axios.post('/api/auth/signout')
       //   .then(() => {
           dispatch(signoutsuccess())
+          navigate('/')
           console.log('sign out')
         // })
         // .catch(e => console.log(e))
